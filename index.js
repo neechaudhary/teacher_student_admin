@@ -39,6 +39,7 @@ app.use("/api", require("./routes/admin/auth"));
 app.use("/api", require("./routes/teacher/teacher"));
 app.use("/api", require("./routes/student_list"));
 app.use("/api/image_upload", require("./routes/file_upload"));
+app.use("/api", require("./routes/logout"))
 
 // app.use("/api", require("./routes/category"));
 

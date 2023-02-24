@@ -11,7 +11,8 @@ router.get("/student-list", (req, res) => {
         .exec((error, students) => {
             if (error) return res.status(400).json({ error });
             if (students) {
-                res.status(200).json({ students });
+                // res.status(200).json({ students });
+                res.json(students)
             }
         });
 });

@@ -37,18 +37,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['user', 'admin','teacher'],
-        default: 'user'
-    },
-    contactNumber: { 
-        type: String
-     },
-    profilePicture: {
-        type: String
-    },
-    paper: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Paper",
+       
     }
 }, {timestamps: true});
 

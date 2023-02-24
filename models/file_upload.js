@@ -12,6 +12,9 @@ const detail_with_image = mongoose.Schema({
             enum: ['pending', 'reviewed'],
             default : 'pending'
       },
+      file_name: {
+            type: String,
+      },
       avatar: {
             type: String,
 

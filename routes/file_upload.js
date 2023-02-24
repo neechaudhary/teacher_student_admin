@@ -20,9 +20,12 @@ router.post('/upload',getauthuser, async(req, res) => {
         } else {
             //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
             let avatar = req.files.avatar;
+
+            // split name with . 
           
+            let file_name = Date.now() + "-"+avatar.name;
             //Use the mv() method to place the file in upload directory (i.e. "uploads")
-            avatar.mv('./uploads/' + avatar.name);
+            avatar.mv('./uploads/'+file_name);
 
             //send response
             // res.send({
@@ -35,7 +38,8 @@ router.post('/upload',getauthuser, async(req, res) => {
             const image = new image_upload({
                 name: req.body.name,
                 user: user_id,
-                avatar: req.protocol+"://"+req.get("host")+"/"+avatar.name,
+                file_name: file_name,
+                avatar: req.protocol+"://"+req.get("host")+"/"+file_name,
             });
             await image.save();
             res.send({
@@ -56,23 +60,24 @@ router.post('/upload',getauthuser, async(req, res) => {
 //get all files where status is pending
 router.get('/getall',getauthuser, async(req, res) => {
     try {
-        const user = req.user;
-        const user_id= user._id;  
-        const image = await image_upload.find({user: user_id, status: 'pending'});
+        // const user = req.user;
+        // const user_id= user._id; 
+        // console.log(user_id)
+        const image = await image_upload.find({ status: 'pending'});
         res.send(image);
     } catch (err) {
         res
             .status(500)
-            .send(err);
+            .send(err.message);
     }
 });
 
 //get all files where status is reviewed
 router.get('/getallreviewed',getauthuser, async(req, res) => {
     try { 
-        const user = req.user;
-        const user_id= user._id;
-        const image = await image_upload.find({user: user_id, status: 'reviewed'});
+        // const user = req.user;
+        // const user_id= user._id;
+        const image = await image_upload.find({ status: 'reviewed'});
         res.send(image);
     } catch (err) {
         res
@@ -86,7 +91,7 @@ router.put('/updatestatus/:id',getauthuser, async(req, res) => {
     try {
         const user = req.user;
         const user_id= user._id;
-        const image = await image_upload.findOneAndUpdate({_id: req.params.id, user: user_id}, {status: req.body.status});
+        const image = await image_upload.findOneAndUpdate({_id: req.params.id}, {status: req.body.status});
         res.send(image);
     } catch (err) {
         res
