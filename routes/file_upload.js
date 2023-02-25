@@ -2,6 +2,7 @@ const express= require('express');
 const router = express.Router();
 const image_upload = require('./../models/file_upload');
 const {getauthuser} = require("./../config/authorize");
+const user= require('./../models/user');
 require("dotenv").config();
 const path = require('path');
 const fs = require('fs');
@@ -63,7 +64,7 @@ router.get('/getall',getauthuser, async(req, res) => {
         // const user = req.user;
         // const user_id= user._id; 
         // console.log(user_id)
-        const image = await image_upload.find({ status: 'pending'});
+        const image = await image_upload.find({ status: 'pending'}).populate('user');
         res.send(image);
     } catch (err) {
         res
@@ -77,7 +78,7 @@ router.get('/getallreviewed',getauthuser, async(req, res) => {
     try { 
         // const user = req.user;
         // const user_id= user._id;
-        const image = await image_upload.find({ status: 'reviewed'});
+        const image = await image_upload.find({ status: 'reviewed'}).populate('user');
         res.send(image);
     } catch (err) {
         res

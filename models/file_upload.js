@@ -5,7 +5,7 @@ const detail_with_image = mongoose.Schema({
       },
      user:{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'user'
+            ref: 'User'
      },
       status: {
             type: String,
