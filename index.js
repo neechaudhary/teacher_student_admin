@@ -10,7 +10,7 @@ require('dotenv').config();
 //mongodb connection
 const connectDB = require("./config/connection");
 connectDB();
-const allowedOrigins = ["http://localhost:3001", "http://localhost:3000","https://teacher-admin-student.vercel.app/"]
+const allowedOrigins = ["http://localhost:3001", "http://localhost:3000","https://teacher-admin-student.vercel.app"]
 app.use(cors(
     {
         origin: allowedOrigins,
@@ -44,5 +44,5 @@ app.use("/api", require("./routes/logout"))
 // app.use("/api", require("./routes/category"));
 
 app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
+    console.log(`Server is running on port ${process.env.PORT} !!!`);
 });
