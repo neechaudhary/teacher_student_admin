@@ -41,7 +41,7 @@ exports.signin = (req, res) => {
             if (error) return res.status(400).json({ error });
             if (user) {
                 //authenticate is available in userSchema.methods, it will authenticate the password
-                if (user.authenticate(req.body.password) && user.role === req.body.role || "user") {
+                if (user.authenticate(req.body.password) && user.role === req.body.role) {
                     const token = jwt.sign({
                         _id: user._id,
                         role: user.role

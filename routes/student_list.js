@@ -44,5 +44,15 @@ router.get("/paper_list/:status", getauthuser, async (req, res) => {
     }
 });
 
+//get user details from the token
+router.get("/getuser", getauthuser, async (req, res) => {
+    try {
+        const user = req.user;
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 
 module.exports = router;
